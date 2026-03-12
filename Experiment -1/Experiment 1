@@ -1,5 +1,7 @@
 let pic
 
+//code base sourced from workshop experiment from week 5 text and images
+
 function preload(){
   pic=loadImage('P5art.jpg')
 }
