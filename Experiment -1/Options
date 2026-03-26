@@ -1,0 +1,5 @@
+A playful control panel, where pressing buttons or interacting with the screen produces interesting effects.
+A data visualiser for a static set of data, where the user can influence some aspect of the data selection or how it appears, with some animated effect when data or view changes 
+Experiment with the moire effect. Create 3 variations or experiments that change over time or change with the mouse.
+Find a 2d design or visual pattern that inspires you - this can be an image from a book, poster, album cover or graphic effect from within a game. The design should be mainly simple forms, shapes, lines, and text. You do not have to recreate it exactly. Using p5.js attempt to recreate aspects of the design to create something that renders differently each time you refresh it, or which has some interactive control to change its behaviour.
+Alternative pixels – display pixel data from the webcam in at least 3 ways that are not pixels, or directly coloured squares, and where the effects can be modified in some way through user iteration

@@ -1,0 +1,6 @@
+•A city or landscape generator, with at least 3 distinct types of building, land or other object. It should be unique each time you run it. 
+•Mouse disturber - a 'force field' from the mouse changes or moves an arrangement of shapes when the mouse is near or over them. Create three different variations of behaviour. 
+•A mouse and/or touch driven painting tool with 4 different 'brush' tools. This can work in an expected way but you can make something novel, that subverts users typical expectations. 
+•An FFT driven Audio visualiser that responds to different input frequencies in an interesting way. The user should be able to modify soem aspect of the behavior 
+•one key game (two players) with a clear win state  
+•A keyboard driven visual and audio instrument - see Patatap where a keystroke triggers different effects 
