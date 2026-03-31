@@ -1,15 +1,21 @@
+let fileName = 'hl1_song10.mp3';
 let mySound
 let fft
+let songName;
+let audioLevel
 
 function preload() {
-  mySound = loadSound('hl1_song10.mp3')
+  mySound = loadSound(fileName);
 }
 
+
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  createCanvas(800, 800);
   angleMode(DEGREES)
-  rectMode(CENTER)
+  rectMode(CORNER)
+  
   fft = new p5.FFT(0.3)
+
   
   noLoop()
 }
@@ -19,23 +25,53 @@ function draw() {
   
   translate(width / 2 , height / 2)
   
-  fft.analyze()
-  amp = fft.getEnergy(20, 200)
+// --- VOLUME PERCENTAGE DISPLAY ---
+  push();
+  fill(0, 190, 255);
+  noStroke();
+  textAlign(CENTER, CENTER);
+
+  let volPercent = map(audioLevel, 0, 255, 0, 100);
+  
+  volPercent = constrain(volPercent, 0, 100);
+  
+  textSize(20);
+  textFont('Courier New');
+  text("Volume", 0, -15);
+  
+  textSize(28);
+
+  text(floor(volPercent) + "%", 0, 10); 
+  pop();
+  
+  spectrum = fft.analyze()
+  audioLevel = fft.getEnergy(20, 200)
+  
+  let visualBins = floor(spectrum.length* 0.66);
+
+  stroke(0, 190, 255,)
+  strokeWeight(15)
+  
+  for (let i = 0; i < visualBins; i++) {
+    let angle = map(i, 0, visualBins, 0, 360)
+    let amp = spectrum[i]
+    let r = map(amp, 0, 256, 0, 150) // The height of the bar
+    
+    push()
+    rotate(angle)
+    // Draw the bar starting from the waveform's inner radius (~150)
+    rect(0, 100, 0,  r) 
+    pop()
+  }
   
   push()
-  if (amp > 230) {
+  if (audioLevel > 230) {
   rotate(random(-0.5, 0.5))
   }
   
+
   
-  pop()
-  
-  let alpha = map(amp, 0, 255, 120, 120)
-  fill(0, alpha)
-  noStroke()
-  rect(0, 0, width, height)
-  
-  stroke(255)
+  stroke(0,190,255)
   strokeWeight(3)
   noFill()
   
