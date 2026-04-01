@@ -108,5 +108,6 @@ function mouseClicked() {
     loop()
   }
 }
-
+//Blue varient that used audio files
 // codebase from :https://editor.p5js.org/ariel.koh/sketches/u7EC2WqFo & https://editor.p5js.org/DaveWebbBSU/sketches/R86bHDmis
+//heavy inspiration drawn from the radios in cyberpunk
