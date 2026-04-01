@@ -40,7 +40,7 @@ function draw() {
   spectrum = fft.analyze()
   micLevel = fft.getEnergy(20, 200)
 
-  stroke(0, 190, 255);
+  stroke(0, 255, 255);
   noFill(); 
   strokeWeight(2);
 
