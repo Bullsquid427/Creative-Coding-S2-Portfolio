@@ -14,7 +14,7 @@ function setup() {
   angleMode(DEGREES)
   rectMode(CORNER)
   
-  fft = new p5.FFT(0.3)
+  fft = new p5.FFT(0.8,64)
 
   
   noLoop()
@@ -46,27 +46,33 @@ function draw() {
   
   spectrum = fft.analyze()
   audioLevel = fft.getEnergy(20, 200)
-  
-  let visualBins = floor(spectrum.length* 0.66);
+  // --- SEGMENTED BARS ---
+  stroke(0, 190, 255);
+  noFill();
+  strokeWeight(2);
 
-  stroke(0, 190, 255,)
-  strokeWeight(15)
-  
+
+  let blockHeight = 4; 
+  let blockGap = 2;   
+  let barWidth = 12; 
+
+  let visualBins = floor(spectrum.length * 0.66);
   for (let i = 0; i < visualBins; i++) {
-    let angle = map(i, 0, visualBins, 0, 360)
-    let amp = spectrum[i]
-    let r = map(amp, 0, 256, 0, 150) // The height of the bar
+    let angle = map(i, 0, visualBins, 0, 360);
+    let r_target = map(spectrum[i], 0, 256, 0, 180); 
     
-    push()
-    rotate(angle)
-    // Draw the bar starting from the waveform's inner radius (~150)
-    rect(0, 100, 0,  r) 
-    pop()
-  }
-  
-  push()
-  if (audioLevel > 230) {
-  rotate(random(-0.5, 0.5))
+    push();
+    rotate(angle);
+
+    for (let currentHeight = 0; currentHeight < r_target; currentHeight += (blockHeight + blockGap)) {
+
+      let yPos = 100 + currentHeight;
+
+
+      line(-barWidth / 2, yPos, barWidth/2, yPos );
+    }
+    
+    pop();
   }
   
 
@@ -102,3 +108,5 @@ function mouseClicked() {
     loop()
   }
 }
+
+// codebase from :https://editor.p5js.org/ariel.koh/sketches/u7EC2WqFo & https://editor.p5js.org/DaveWebbBSU/sketches/R86bHDmis
