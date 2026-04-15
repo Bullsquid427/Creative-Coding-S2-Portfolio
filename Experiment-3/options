@@ -1,0 +1,5 @@
+Use of Machine Learning tools such as pose detection, or an image classifier to drive some interesting real-time visual behaviour
+Capture the feed from the web cam to make a distorted of processed version of the image. This should change over time or have some form of user interaction to change it.
+concrete poetry project, or an animated, progressive text display, that reveals a poem or block of text over a period of time in some interesting way, which interacts to user actions
+Use of a physics engine (such as matter.js) to create an interactive simulation of real world (or unreal/subverted) behaviour, or a game mechanic based on physics.
+An interactive and complex system of behaviour, with many independent elements, making use of classes to represent ideas or elements.
