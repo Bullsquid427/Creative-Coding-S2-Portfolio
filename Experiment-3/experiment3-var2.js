@@ -3,6 +3,7 @@ Posted by ggorlen, modified by community. See post 'Timeline' for change history
  Retrieved 2026-04-30, License - CC BY-SA 4.0 
  also see 'base code.js' for more information*/
 
+
 Matter.use(
   'matter-attractors' // plugin name
 );
@@ -31,8 +32,6 @@ var render = Render.create({
     wireframes: false
   }
 });
-
-
 
 // create runner
 var runner = Runner.create();
