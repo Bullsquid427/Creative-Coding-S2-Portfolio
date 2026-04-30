@@ -1,64 +1,109 @@
-let engine;
-let world;
-let planetCenter;
-let attractors = [];
+// Source - https://stackoverflow.com/a/74816915
+// Posted by ggorlen, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-04-30, License - CC BY-SA 4.0
 
-function setup() {
-  createCanvas(800, 800);
-  engine = Matter.Engine.create();
-  world = engine.world;
+Matter.use(
+  'matter-attractors' // plugin name
+);
 
-  // 1. Turn off standard gravity
-  world.gravity.y = 0;
+var Engine = Matter.Engine,
+    Events = Matter.Events,
+    Runner = Matter.Runner,
+    Render = Matter.Render,
+    World = Matter.World,
+    Body = Matter.Body,
+    Mouse = Matter.Mouse,
+    MouseConstraint = Matter.MouseConstraint,
+    Common = Matter.Common,
+    Bodies = Matter.Bodies;
 
-  planetCenter = createVector(width / 2, height / 2);
+// create engine
+var engine = Engine.create();
 
-  // Create a few random bodies
-  for (let i = 0; i < 10; i++) {
-    let b = Matter.Bodies.circle(random(width), random(height), 20);
-    Matter.World.add(world, b);
-    attractors.push(b);
+// create renderer
+var render = Render.create({
+  element: document.body,
+  engine: engine,
+  options: {
+    width: Math.min(document.documentElement.clientWidth, 1024),
+    height: Math.min(document.documentElement.clientHeight, 1024),
+    wireframes: false
   }
+});
 
-  Matter.Runner.run(engine);
-}
 
-function draw() {
-  background(20);
 
-  // Draw the "Planet"
-  fill(0, 150, 255);
-  circle(planetCenter.x, planetCenter.y, 100);
+// create runner
+var runner = Runner.create();
 
-  attractors.forEach(body => {
-    applyRadialGravity(body);
+Runner.run(runner, engine);
+Render.run(render);
+
+// create demo scene
+var world = engine.world;
+world.gravity.scale = 0;
+
+// create a body with an attractor
+var attractiveBody = Bodies.circle(
+  render.options.width / 2,
+  render.options.height / 2,
+  90, 
+  {
+  isStatic: true,
     
-    // Draw the bodies
-    fill(255);
-    beginShape();
-    for (let vert of body.vertices) {
-      vertex(vert.x, vert.y);
+  render: {
+      fillStyle: '#2ecc71',   
+      strokeStyle: '#ffffff', 
+      lineWidth: 15           
+    },
+
+  // example of an attractor function that 
+  // returns a force vector that applies to bodyB
+  plugin: {
+    attractors: [
+      function(bodyA, bodyB) {
+        return {
+          x: (bodyA.position.x - bodyB.position.x) * 1e-6,
+          y: (bodyA.position.y - bodyB.position.y) * 1e-6,
+        };
+      }
+    ]
+  }
+});
+
+World.add(world, attractiveBody);
+
+//  bodies to be attracted
+for (var i = 0; i < 150; i += 1) {
+  var body = Bodies.polygon(
+    Common.random(0, render.options.width), 
+    Common.random(0, render.options.height),
+    Common.random(1, 5),
+    Common.random() > 0.9 ? Common.random(15, 25) : Common.random(5, 10)
+  );
+
+  World.add(world, body);
+}
+
+// mouse control
+var mouse = Mouse.create(render.canvas);
+var mouseConstraint = MouseConstraint.create(engine, {
+  mouse: mouse,
+  constraint: {
+    stiffness: 0.2, 
+    render: {
+      visible: false 
     }
-    endShape(CLOSE);
-  });
-}
+  }
+});
 
-function applyRadialGravity(body) {
-  let forceDirection = p5.Vector.sub(planetCenter, createVector(body.position.x, body.position.y));
-  
-  let distanceSq = forceDirection.magSq();
-  let G = 0.001; // Gravitational constant - adjust to taste
-  
-  // Prevent division by zero or extreme forces when very close
-  distanceSq = constrain(distanceSq, 500, 10000); 
-  
-  let strength = G * (body.mass) / distanceSq;
-  
-  forceDirection.setMag(strength);
+World.add(world, mouseConstraint);
 
-  // 3. Apply the force to the body
-  Matter.Body.applyForce(body, body.position, {
-    x: forceDirection.x,
-    y: forceDirection.y
-  });
-}
+// Keep the mouse in sync with rendering
+render.mouse = mouse;
+
+    
+    Body.translate(attractiveBody, {
+        x: 0,
+        y: 0
+    });
