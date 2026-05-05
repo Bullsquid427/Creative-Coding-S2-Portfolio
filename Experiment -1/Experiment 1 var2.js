@@ -1,14 +1,25 @@
 let pic
+let sfx
 
 //code base sourced from workshop experiment from week 5 text and images
 
 function preload(){
-  pic=loadImage('P5art.jpg')
+  pic=loadImage('P5duke.jpg');
+  sfx=loadSound('xbox-2001-startup.mp3');
 }
 
 function setup() {
-  createCanvas(400, 400);
+  createCanvas(600,600);
   background(220);
+}
+
+function mousePressed() {
+  // 3. Simple trigger: play sound when the user clicks the canvas
+  if (sfx.isPlaying()) {
+    sfx.pause();
+  } else {
+    sfx.play();
+  }
 }
 
 function draw() {
@@ -27,7 +38,7 @@ function draw() {
       g=pic.pixels[offset+1]
       b=pic.pixels[offset+2]
       s=(r+g+b)/3
-      fill(30,100,160)
+      fill(16,103,1)
       rect(i,j,step*s/255,step)
     }
     
