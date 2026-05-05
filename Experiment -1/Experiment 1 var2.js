@@ -14,7 +14,7 @@ function setup() {
 }
 
 function mousePressed() {
-  // 3. Simple trigger: play sound when the user clicks the canvas
+  
   if (sfx.isPlaying()) {
     sfx.pause();
   } else {

@@ -1,9 +1,14 @@
 let pic
+let sounds= [];
 
 //code base sourced from workshop experiment from week 5 text and images
 
 function preload(){
   pic=loadImage('P5art.jpg')
+  sounds[0] = loadSound('Estringbass.mp3');
+  sounds[1] = loadSound('Astringbass.mp3'); 
+  sounds[2] = loadSound('Dstringbass.mp3');
+  sounds[3] = loadSound('Gstringbass.mp3');
 }
 
 function setup() {
@@ -11,12 +16,17 @@ function setup() {
   background(220);
 }
 
+function mousePressed() {
+  let randomSound = random(sounds);
+  randomSound.play();
+}
+
 function draw() {
   background(0);
   noStroke()
   let iw=pic.width
   let ih=pic.height
-  let step=floor(map(mouseX,0,width,5,10))
+  let step=floor(map(mouseX,0,width,5,40))
   let offset
   let r,g,b,s
   pic.loadPixels()
@@ -27,8 +37,11 @@ function draw() {
       g=pic.pixels[offset+1]
       b=pic.pixels[offset+2]
       s=(r+g+b)/3
-      fill(30,100,160)
-      rect(i,j,step*s/255,step)
+      fill(r,120,250)
+      push()
+      translate(i,j)
+      rect(0,0,step,step*s/255,)
+      pop()
     }
     
   }
