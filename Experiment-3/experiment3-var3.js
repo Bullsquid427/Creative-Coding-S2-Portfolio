@@ -32,8 +32,6 @@ var render = Render.create({
   }
 });
 
-
-
 // create runner
 var runner = Runner.create();
 
