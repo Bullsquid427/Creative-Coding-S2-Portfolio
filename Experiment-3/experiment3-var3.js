@@ -3,6 +3,17 @@ Posted by ggorlen, modified by community. See post 'Timeline' for change history
  Retrieved 2026-04-30, License - CC BY-SA 4.0 
  also see 'base code.js' for more information*/
 
+let collisionSound;
+//preload for sound effect
+function preload() {
+  collisionSound = loadSound('metal_solid_impact_hard5.wav');
+}
+
+//function to run the rest of the script now that the preload is done
+function setup() {
+  
+  noCanvas();
+
 Matter.use(
   'matter-attractors' // plugin name
 );
@@ -31,6 +42,14 @@ var render = Render.create({
     wireframes: false
   }
 });
+  
+// --- COLLISION SOUND LOGIC ---
+  Events.on(engine, 'collisionStart', function(event) {
+    
+    if (collisionSound && collisionSound.isLoaded()) {
+      collisionSound.play();
+    }
+  });
 
 // create runner
 var runner = Runner.create();
@@ -46,14 +65,12 @@ world.gravity.scale = 0;
 var attractiveBody = Bodies.circle(
   render.options.width / 2,
   render.options.height / 2,
-  90, 
+  120, 
   {
   isStatic: true,
     
   render: {
-      fillStyle: '#2ecc71',   
-      strokeStyle: '#ffffff', 
-      lineWidth: 15           
+      fillStyle: '#2e4bcc',         
     },
 
   // example of an attractor function that 
@@ -73,7 +90,7 @@ var attractiveBody = Bodies.circle(
 World.add(world, attractiveBody);
 
 //  bodies to be attracted
-for (var i = 0; i < 150; i += 1) {
+for (var i = 0; i < 15; i += 1) {
   var body = Bodies.polygon(
     Common.random(0, render.options.width), 
     Common.random(0, render.options.height),
@@ -100,9 +117,13 @@ World.add(world, mouseConstraint);
 
 // Keep the mouse in sync with rendering
 render.mouse = mouse;
-
+ 
     
     Body.translate(attractiveBody, {
         x: 0,
         y: 0
     });
+ // Run everything
+  Runner.run(Runner.create(), engine);
+  Render.run(render);
+}

@@ -52,7 +52,7 @@ var attractiveBody = Bodies.circle(
   isStatic: true,
     
   render: {
-      fillStyle: '#2ecc71',   
+      fillStyle: '#5813B8',   
       strokeStyle: '#ffffff', 
       lineWidth: 15           
     },
@@ -74,13 +74,29 @@ var attractiveBody = Bodies.circle(
 World.add(world, attractiveBody);
 
 //  bodies to be attracted
-for (var i = 0; i < 150; i += 1) {
-  var body = Bodies.polygon(
-    Common.random(0, render.options.width), 
-    Common.random(0, render.options.height),
-    Common.random(1, 5),
-    Common.random() > 0.9 ? Common.random(15, 25) : Common.random(5, 10)
-  );
+for (var i = 0; i < 20; i += 1) {
+  var x = Common.random(0, render.options.width);
+  var y = Common.random(0, render.options.height);
+  var radius = Common.random() > 0.9 ? Common.random(15, 25) : Common.random(5, 10);
+
+  var body = Bodies.circle(x, y, radius, {
+    render: { fillStyle: '#95a5a6' },
+    frictionAir: 0, // friction set to zero
+  });
+  
+  //direction from the planet to the body
+  var dx = x - (render.options.width / 2);
+  var dy = y - (render.options.height / 2);
+  
+  //perpendicular vector for orbit
+  var speed = 5; 
+  var distance = Math.sqrt(dx * dx + dy * dy);
+  
+  var velocityX = (-dy / distance) * speed;
+  var velocityY = (dx / distance) * speed;
+
+  //velocity
+  Body.setVelocity(body, { x: velocityX, y: velocityY });
 
   World.add(world, body);
 }
