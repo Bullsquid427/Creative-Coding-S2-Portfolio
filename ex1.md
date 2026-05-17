@@ -3,8 +3,9 @@ Experiement 1
 Experiment 1 is essentially an image with a mouse-controlled effect over it.
 It is based off one of the image manipulation P5 experiments we did in class.
 My two varients of it change a couple of things but most importantly add a sound when the experiement is clicked
-The second varient only plays one sound and the third plays four different sounds at random.
-Remember to click to enable sounds on variants 2 & 3
+The second varient only plays one sound and the third plays four different sounds at random, each being the sound 
+of a different string recorded from my Bass (pictured).
+Remember to click to enable sounds on variants 2 & 3.
 
 [Variant 1](/Experiment-1/Variant1/index.html)
 [Variant 2](/Experiment-1/Variant2/index.html)
