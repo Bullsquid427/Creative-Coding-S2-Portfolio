@@ -7,4 +7,6 @@ while making the attracted bodies movable by mouse.
 For the first variant, I introduced some inital perpendicular inertia to some of the bodies to cause them to orbit the planet.
 For the second variant, I added a sound effect for the physics collisions. 
 
-[see experiment 3](/Experiment-3/index.html)
+[Variant 1](/Experiment-3/Variant1/index.html)
+[Variant 2](/Experiment-3/Variant2/index.html)
+[Variant 3](/Experiment-3/Variant3/index.html)
