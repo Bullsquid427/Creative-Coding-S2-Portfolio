@@ -4,7 +4,7 @@ let sounds= [];
 //code base sourced from workshop experiment from week 5 text and images
 
 function preload(){
-  pic=loadImage('P5art.jpg')
+  pic=loadImage('P5bass.jpg')
   sounds[0] = loadSound('Estringbass.mp3');
   sounds[1] = loadSound('Astringbass.mp3'); 
   sounds[2] = loadSound('Dstringbass.mp3');
