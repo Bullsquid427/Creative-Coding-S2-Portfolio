@@ -1,1 +1,0 @@
-info on ex2
