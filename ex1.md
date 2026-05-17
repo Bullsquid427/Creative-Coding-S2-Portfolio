@@ -9,4 +9,4 @@ The second varient only plays one sound and the third plays four different sound
 [Variant 2](/Experiment-1/Variant2/index.html)
 [Variant 3](/Experiment-1/Variant3/index.html)
 
-[variant 1(test with link to js file instead of index.html)](/Experiment-1/Variant1/Experiment%201%20var1.js)
+[variant 1(test with link to js file instead of index.html)](/Experiment-1/Variant1/Experiment1var1.js)
