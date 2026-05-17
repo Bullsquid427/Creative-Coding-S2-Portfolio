@@ -8,3 +8,5 @@ The second varient only plays one sound and the third plays four different sound
 [Variant 1](/Experiment-1/Variant1/index.html)
 [Variant 2](/Experiment-1/Variant2/index.html)
 [Variant 3](/Experiment-1/Variant3/index.html)
+
+[variant 1](/Experiment-1/Variant1/Experiment%201%20var1.js)
